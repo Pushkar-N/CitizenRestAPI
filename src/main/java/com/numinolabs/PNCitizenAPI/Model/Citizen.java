@@ -1,81 +1,60 @@
 package com.numinolabs.PNCitizenAPI.Model;
 
-import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.intellij.lang.annotations.Pattern;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Citizen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
+
+    @Column(name = "full_name", length = 255, nullable = false)
+    @Pattern(value = "^[A-Za-z]*$")
     private String fullName;
-    @Column(length = 16,nullable = false)
+
+    @NotNull
+//    @Size(min = 16, max = 16)
+    @Column(name = "aadhar_id", length = 16, nullable = false)
     private String aadharId;
-    @Column
+
+    @Column(name = "date_of_birth",nullable = false)
     private Date dateOfBirth;
-    @Column
+
+    @Size(max = 255)
+    @Column(name = "state",length = 255, nullable = false)
     private String state;
-    @Column
+
+    @Column(name = "pincode",length = 10, nullable = false)
     private String pincode;
-    @Column
+
+    @NotNull
+    @Column(name = "gender",nullable = false)
     private String gender;
 
-    public long getId() {
-        return id;
-    }
+    @Column(name = "email")
+    private String email;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    @NotNull
+    @Column(name = "primary_phone",nullable = false,length = 15)
+    private Long primaryPhone;
 
-    public String getFullName() {
-        return fullName;
-    }
+    @Column(name = "other_phone",length = 15)
+    private Integer otherPhone;
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getAadharId() {
-        return aadharId;
-    }
-
-    public void setAadharId(String aadharId) {
-        this.aadharId = aadharId;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+    @NotNull
+    @Column(name = "address",nullable = false )
+    private String address;
 }
