@@ -9,12 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "users")
+@RequestMapping(path = "citizen")
 public class ApiController {
 
     @Autowired
@@ -26,13 +27,13 @@ public class ApiController {
     }
 
     @GetMapping(path = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    public ResponseEntity<Citizen> getUser(@PathVariable long id){
+    public ResponseEntity<Citizen> getCitizen(@PathVariable long id){
         Citizen citizen =  citizenRepo.findById(id).get();
         return new ResponseEntity<Citizen>(citizen, HttpStatus.OK);
     }
 
     @PostMapping(path = "")
-    public ResponseEntity<Object> createCitizens(@RequestBody Citizen citizen){
+    public ResponseEntity<Object> createCitizens(@Valid @RequestBody Citizen citizen){
         Citizen savedCitizen = citizenRepo.save(citizen);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
