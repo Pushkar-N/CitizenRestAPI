@@ -1,6 +1,7 @@
 package com.numinolabs.PNCitizenAPI.Exception;
 
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> HandleNullPointerException(Exception ex, WebRequest request){
         System.out.println("getLocalizedMessage :" + ex.getLocalizedMessage());
         return new ResponseEntity<>(ex.getLocalizedMessage(), new HttpHeaders(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = DataIntegrityViolationException.class)
+    public ResponseEntity<?> HandleMethodArgumentNotValidException(DataIntegrityViolationException ex, WebRequest request){
+        System.out.println("getLocalizedMessage :" + ex.getLocalizedMessage());
+        return new ResponseEntity<>(ex.getLocalizedMessage(), new HttpHeaders(),HttpStatus.BAD_REQUEST);
     }
 }
