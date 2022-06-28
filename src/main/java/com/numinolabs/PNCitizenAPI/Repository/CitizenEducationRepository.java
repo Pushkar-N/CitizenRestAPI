@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 public interface CitizenEducationRepository extends JpaRepository<CitizenEducation, Long> {
 
-    public CitizenEducation findByCitizenId(Long id);
+    CitizenEducation findByCitizenId(Long id);
 
     @Transactional
     void deleteByCitizenId(Long id);
