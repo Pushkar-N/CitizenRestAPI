@@ -23,42 +23,47 @@ public class Citizen {
     private long id;
 
     @Column(name = "full_name", length = 255, nullable = false)
+    @NotNull
     private String fullName;
 
-    @NotNull(message = "Aadhar Id is Mandatory")
-    @Size(min = 16, max = 16,message = "Aadhar Id must be 16 digits")
     @Column(name = "aadhar_id", length = 16, nullable = false)
+    @Size(min = 16, max = 16,message = "Aadhar Id must be 16 digits")
+    @NotNull(message = "Aadhar Id is Mandatory")
     private String aadharId;
 
     @Column(name = "date_of_birth",nullable = false)
+    @NotNull
     private Date dateOfBirth;
 
-    @Size(max = 255)
+
     @Column(name = "state",length = 255, nullable = false)
+    @NotNull
+    @Size(max = 255)
     private String state;
 
-    @Size(min = 2, max = 10)
     @Column(name = "pincode",length = 10, nullable = false)
+    @Size(min = 2, max = 10)
+    @NotNull
     private String pincode;
 
-    @NotNull
     @Column(name = "gender",nullable = false)
+    @NotNull
     private String gender;
 
-    @Email(message = "Please enter a valid email address")
     @Column(name = "email")
+    @Email(message = "Please enter a valid email address")
     private String email;
 
+    @Column(name = "primary_phone",nullable = false,length = 15)
     @NotNull
     @Size(max = 15)
-    @Column(name = "primary_phone",nullable = false,length = 15)
     private Long primaryPhone;
 
-    @Size(max = 15)
     @Column(name = "other_phone",length = 15)
+    @Size(max = 15)
     private Integer otherPhone;
 
-    @NotNull
     @Column(name = "address",nullable = false )
+    @NotNull
     private String address;
 }
